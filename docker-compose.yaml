@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  php-fpm:
+    container_name: ${PROJECT_NAME}_php
+    build:
+      context: ./docker/$APP_ENV/php
+    volumes:
+      - ./app:/app
+
+  pgsql:
+    image: postgres:11-alpine
+    ports:
+      - 54321:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
