@@ -1,6 +1,6 @@
 .PHONY: *
 
-include ./docker/.env
+include .env
 APP_PATH=${PWD}/app
 export
 
@@ -10,5 +10,5 @@ up-%:
 down:
 	docker-compose down --no-build
 
-in-php:
-	docker exec -u www-data:www-data -it ${PROJECT_NAME}-php bash
+in-%:
+	docker exec -u www-data:www-data -it ${PROJECT_NAME}-$* bash
