@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  php-fpm:
+    image: ${COMPOSE_PROJECT_NAME}/php
+    container_name: ${COMPOSE_PROJECT_NAME}_php
+    volumes:
+      - ${PWD}/app:/app
+
+  nginx:
+    image: ${COMPOSE_PROJECT_NAME}/nginx
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
+    volumes:
+      - ${PWD}/app:/app
+    ports:
+      - 8081:80
+
+#  pgsql:
+#    image: postgres:11-alpine
+#    ports:
+#      - 54321:5432
+#    environment:
+#      - POSTGRES_USER=user
+#      - POSTGRES_PASSWORD=password
+#      - POSTGRES_DB=database

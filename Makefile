@@ -1,11 +1,10 @@
-include .env
+.PHONY: *
+
+include ./docker/.env
 export
 
-up:
-	docker-compose up -d --build
+build:
+	export COMPOSE_FILE=docker/build/docker-compose.yml && docker-compose build
 
-down:
-	docker-compose down
-
-in-php:
-	docker exec -u www-data:www-data -it ${PROJECT_NAME}_php bash
+up-%:
+	export COMPOSE_FILE=docker/deploy/$*/docker-compose.yml && docker-compose up -d --no-build --force-recreate --remove-orphans
