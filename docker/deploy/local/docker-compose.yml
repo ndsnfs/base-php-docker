@@ -5,6 +5,10 @@ services:
   php-fpm:
     image: ${COMPOSE_PROJECT_NAME}/php-fpm
     container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
+    entrypoint:
+      - /bin/bash
+      - -c
+      - /usr/local/bin/dev-entrypoint.sh ${CURRENT_UID} ${CURRENT_GID}
     volumes:
       - ${PWD}/app:/app
 
