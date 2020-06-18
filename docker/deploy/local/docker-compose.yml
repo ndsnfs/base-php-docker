@@ -3,8 +3,8 @@ version: '3'
 services:
 
   php-fpm:
-    image: ${COMPOSE_PROJECT_NAME}/php
-    container_name: ${COMPOSE_PROJECT_NAME}_php
+    image: ${COMPOSE_PROJECT_NAME}/php-fpm
+    container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
     volumes:
       - ${PWD}/app:/app
 
