@@ -2,6 +2,8 @@ FROM php:7.2-fpm
 
 COPY ./bin/* /usr/local/bin/
 
+ENV COMPOSER_HOME=/home/www-data/composer
+
 RUN apt-get update && apt-get install -y \
         curl \
         sudo \
@@ -9,9 +11,12 @@ RUN apt-get update && apt-get install -y \
         zip \
         unzip \
         libpq-dev \
-    && mkdir /app \
+    && mkdir -p /app ${COMPOSER_HOME} \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && docker-php-ext-install pdo pdo_pgsql \
-    && chmod o+x /usr/local/bin/*
+    && chmod o+x /usr/local/bin/* \
+    && chown www-data:www-data ${COMPOSER_HOME} \
+    && chmod o+rwx ${COMPOSER_HOME}
+
 
 WORKDIR /app
