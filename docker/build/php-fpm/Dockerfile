@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.4-fpm
 
 COPY ./bin/* /usr/local/bin/
 
@@ -18,5 +18,6 @@ RUN apt-get update && apt-get install -y \
     && chown www-data:www-data ${COMPOSER_HOME} \
     && chmod o+rwx ${COMPOSER_HOME}
 
+RUN pecl install xdebug-3.0.0
 
 WORKDIR /app
